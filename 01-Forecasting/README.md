@@ -1,53 +1,53 @@
-MGT-353 Supply Chain Analytics — Portfolio Milestone 1
-Muhammad Ziyam | Nestlé Pakistan | Nestlé Fruita Vitals 200ml
+MGT353 Forecasting Milestone 1: Nestlé Pakistan, Fruita Vitals 200ml
+Company-Calibrated Synthetic Dataset for Academic Analysis — illustrative figures, calibrated to Nestle Pakistan's disclosed scale, not actual company records.
+	
+Student	Muhammad Ziyam
+ERP ID	28359
+Course	Supply Chain Analytics (MGT-353), Portfolio Milestone 1: Forecasting Intelligence Dashboard & Decision Story
+Instructor	Faisal Jalal
+Version date	8 October 2026
 
-FINAL SUBMISSION FILES
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Data.csv
-Clean CSV version of the weekly synthetic dataset.
+What this package contains
+File	What it is	Brief deliverable
+..._Synthetic_Dataset.xlsx	Four sheets: README (live data checks), Data (104 weekly rows, 12 fields, 1 Jan 2024 – 22 Dec 2025), Data_Dictionary (12 fields), Assumption_Log (18 items)	1. Synthetic dataset
+..._Analysis_workbook_notebook.ipynb	Colab notebook in eight sections: setup and data checks, demand profile, error metrics, models and comparison, regression, holdout validation, stress test, summary. Saved outputs and charts are included	2. Analysis workbook / notebook
+..._Forecasting Dashboard_v1.html	Self-contained interactive dashboard (zones A–H). Opens in any browser, no internet needed	3. Forecasting Dashboard v1
+..._Decision_Storyboard.pptx	Six-slide management storyboard, from decision to action	4. Decision storyboard
+..._Executive_Decision_Memo.docx	One-page memo: recommendation, evidence, risk, review trigger	5. Executive decision memo
+..._AI_Use_Log.docx	Tools used, prompt and output log, AI errors found and corrected, prompt appendix	6. AI use log
+..._Validation_note.docx	Holdout design, leakage check, five largest errors and diagnosis	7. Validation note
+..._Final_Report.docx	Consolidated report with every mandatory table (data dictionary, model comparison, regression, stress test, quality gates)	Supporting document
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Data.xlsx
-Submission-ready dataset workbook with ReadMe, Synthetic_Data, Data_Dictionary, Assumption_Log and Final_Numbers.
+The decision
+How many Fruita Vitals 200ml packs should we plan to supply over 29 Dec 2025 – 22 Mar 2026, and how much should we commit now versus keep flexible?
+Recommendation: plan about 9.4 million packs (realistic range 8.9–9.8 million). Commit firm orders to 100% of the forecast, hold about 1.2 million packs (1.5 weeks) of opening stock, and keep flexible supply for up to 10% of weekly volume. Reforecast if the first two weeks fall outside 1.22–1.49 million packs, the tracking signal leaves ±4, four-week demand is more than 10% off forecast, a packaging delivery slips by more than a week, or the Ramadan or Eid date moves.
+Headline results (12 unseen holdout weeks, Error = Actual − Forecast)
+Model	MAPE	WAPE	MAD (packs)	Bias (packs/week)	Tracking signal
+Regression (planned inputs)	6.2%	6.4%	46,868	+15,436	+4.0
+Seasonal index + event	9.0%	9.2%	67,466	−3,662	−0.7
+Naive	10.8%	10.8%	79,300	−22,900	−3.5
+Exponential smoothing (α = 0.6)	13.5%	13.1%	96,342	−56,984	−7.1
+Moving average (4-week)	14.9%	14.3%	105,113	−74,525	−8.5
+Exponential smoothing (α = 0.3)	15.4%	14.7%	108,213	−80,727	−9.0
+Seasonal naive (52)	16.7%	17.0%	125,325	+76,858	+7.4
+Positive bias and tracking signal mean under-forecast; negative means over-forecast.
+How to use each file
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Analysis.ipynb
-Corrected and executed final Google Colab/Jupyter notebook with demand profiling, error metrics, model comparison (including managerial comments), holdout validation, regression, quantified stress testing and true forward forecast.
+•	Dashboard: double-click the .html file. Use the metric buttons in the accuracy panel, the scenario dropdown in the stress-test panel, and hover over chart points for values.
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Dashboard.html
-Standalone interactive executive dashboard export.
+•	Notebook: open in Google Colab (File ▸ Upload notebook), choose Runtime ▸ Run all, and upload the dataset as a CSV when asked. The notebook expects a file named fruita_vitals_200ml_weekly_synthetic.csv containing the 12 data columns from the Data sheet (columns A–L). A re-exported CSV may show a different SHA-256 hash from the one printed in the saved outputs, because of formatting only; the values are the same.
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Storyboard.pptx
-Title page plus six mandatory management frames: Decision, Demand Pattern, Model Choice, Drivers, Risk and Action.
+•	Documents and slides: open in Word and PowerPoint. Suggested reading order: Executive Decision Memo, Decision Storyboard, Dashboard, Final Report, Validation Note, AI Use Log.
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Executive_Memo.docx
-Maximum one-page executive decision memo.
+Data and integrity notes
+•	All data are synthetic, built from a seeded generator calibrated to Nestlé Pakistan's disclosed revenue (PKR 199,069 million), and frozen before modelling (SHA-256 begins 5bdda4d12a2008f0). Driver effects were built in by design, so results demonstrate method, not real-world proof.
+•	Models were fitted on weeks 1–92 and scored on weeks 93–104. Replacing the holdout demand with random numbers changed no forecast (maximum change 0.0), and no recursive forecasting was used.
+•	The regression results are associations, not proven causes. Price cannot be separated from the long-run trend in this data.
+•	Cost, capacity and flexible-supply parameters in the stress test are assumptions, and the scenarios are not probability-weighted.
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_Validation_Note.docx
-Holdout validation, leakage check, top misses and forward-refit note.
+Known limitations
+An unexplained December under-forecast; promo and event coefficients that differ across halves of the data; no event weeks or stockouts in the holdout; and the historical forecast is a simulation that used part of the true effect sizes.
 
-MGT353_Forecasting_M1_MuhammadZiyam_Nestle_AI_Use_Log.xlsx
-AI-use and human-validation record.
+AI use
+Claude (Anthropic) assisted with planning, code, drafting and review. An independent audit prompt re-checked leakage, formulas and coefficients, and the corrections are listed in the AI Use Log.
 
-LOCKED FINAL NUMBERS
-Next 12-week forecast: 8,627,101 units[cite: 8]
-Average weekly forecast: 718,925 units[cite: 34]
-90% committed: 7,764,391 units[cite: 8]
-10% flexible: 862,710 units[cite: 8]
-20% downside inventory exposure: 1,725,420 units[cite: 8]
-20% upside shortage exposure: 1,725,420 units[cite: 8]
-Best model: Event-Capable Regression[cite: 34]
-Holdout WAPE: 10.49%[cite: 23]
-Holdout MAPE: 11.02%[cite: 23]
-Holdout MAD: 69,393 units/week[cite: 23]
-Tracking Signal: -9.93[cite: 23]
-Regression R²: 75.8%[cite: 24]
-Adjusted R²: 75.1%[cite: 24]
-
-Error convention: Actual - Forecast. Synthetic-data disclosure applies across all deliverables.
-
-FINAL AUDIT STATUS
-Notebook executed end-to-end with no cell errors.
-Notebook loads the packaged Data.csv without manual renaming.
-Dataset workbook includes ReadMe, Data Dictionary, Assumption Log and locked final numbers.
-Dashboard HTML contains the final 8.62M forecast / 7.76M commit decision.
-Storyboard contains a title page plus all six required management frames.
-Executive memo and validation note are one-page and visually checked.
-AI Use Log has no pending entries and records final corrections.
